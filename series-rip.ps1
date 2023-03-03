@@ -2,7 +2,7 @@
 $wmp = New-Object -ComObject "WMPlayer.OCX.7"
 
 # Specify the output directory for the transcoded videos
-$outputDir = "Z:\Movies"
+$outputDir = "Z:\TV"
 $drive = $wmp.cdromCollection.Item(0)
 # Loop indefinitely
 while ($true) {
@@ -27,12 +27,13 @@ while ($true) {
 
       & "C:\Program Files (x86)\MakeMKV\makemkvcon64.exe" mkv disc:0 all --minlength=600 "$outputDir\$diskLabel\$seriesDir"
 
-      $children = Get-ChildItem "$outputDir\$diskLabel" | sort lastwritetime
+      $children = Get-ChildItem "$outputDir\$diskLabel\$seriesDir" | sort lastwritetime
       
       $episodeNumebr = 1;
       foreach ($child in $children)
       {
-        Move-Item "$outputDir\$diskLabel\$seriesDir\$child" "$outputDir\$diskLabel\$seriesDir\S$seriesNumberE$episodeNumber.mkv"
+        $s = "S{0:d2}E{1:d2}" -f $seriesNumber, $episodeNumebr
+        Move-Item "$outputDir\$diskLabel\$seriesDir\$child" "$outputDir\$diskLabel\$seriesDir\$s.mkv"
         $episodeNumebr = $episodeNumebr + 1
       }      
 
