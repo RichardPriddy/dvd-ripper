@@ -11,11 +11,7 @@ while ($true) {
     # Clean up the DVD title for use in the output path
     $dvdTitle = $diskLabel -replace '\s','_' -replace ':',' -'
 
-    $makeMKV = "C:\Program Files (x86)\MakeMKV\makemkvcon64.exe"
-
     New-Item -Path $outputDir -Name $diskLabel -ItemType "directory"
-
-    $makeMKVArgs = "mkv disc:0 all --minlength=3000 $outputDir\$diskLabel"
 
     # Transcode the DVD to an MP4 using VLC
     Write-Host "Ripping DVD: $diskLabel"
