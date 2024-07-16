@@ -25,7 +25,7 @@ while ($true) {
       # Transcode the DVD to an MP4 using VLC
       Write-Host "Ripping DVD: $diskLabel"
 
-      & "C:\Program Files (x86)\MakeMKV\makemkvcon64.exe" mkv disc:0 all --minlength=600 "$outputDir\$diskLabel\$seriesDir"
+      & "C:\Program Files (x86)\MakeMKV\makemkvcon64.exe" mkv disc:0 all --minlength=100 "$outputDir\$diskLabel\$seriesDir"
 
       $children = Get-ChildItem "$outputDir\$diskLabel\$seriesDir" | sort lastwritetime
       
